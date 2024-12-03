@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
@@ -25,7 +26,7 @@ include "database.php";
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
-
+    <h1 class="flex items-center justify-center xl:text-5xl font-semibold px-3 text-3xl">Data obat apotek sehat</h1>
     <!-- Modal toggle -->
     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Toggle modal
@@ -62,10 +63,10 @@ include "database.php";
                         <div class="col-span-2 sm:col-span-1">
                             <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis obat</label>
                             <select id="jenis" name="jenis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option selected="">pain killer</option>
-                                <option value="TV">antibiotik</option>
-                                <option value="PC">Analgesik</option>
-                                <option value="GA">obat herbal</option>
+                                <option selected="pain killer">pain killer</option>
+                                <option value="antibiotik">antibiotik</option>
+                                <option value="analgesik">Analgesik</option>
+                                <option value="obat herbal">obat herbal</option>
                             </select>
                         </div>
                         <div class="col-span-2">
@@ -88,69 +89,51 @@ include "database.php";
     <?php
     include "database.php";
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['submit'])) {
         $nama = htmlspecialchars($_POST['nama']);
         $harga = htmlspecialchars($_POST['harga']);
         $jenis = htmlspecialchars($_POST['jenis']);
         $deskripsi = htmlspecialchars($_POST['deskripsi']);
-        $sql = mysqli_query($db, "INSERT INTO `obat`(`id`, `nama_obat`, `jenis_obat`, `harga_obat`, `informasi_obat`) VALUES ('$nama','$harga','$jenis','$deskripsi')");
+        $sql = mysqli_query($db, "INSERT INTO `obat`(`nama_obat`, `jenis_obat`, `harga_obat`, `informasi_obat`) VALUES ('$nama','$jenis','$harga','$deskripsi')");
 
         if (mysqli_affected_rows($db,) > 0) {
-            echo "masuk";
+            echo "Berhasil";
         }
-    }else{
-      echo "nggak ada";
     }
-
 
 
     ?>
 
 
 
-
-    <div class="relative overflow-x-auto flex items-center justify-center">
+    <div class="overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Nama obat
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Informasi obat
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Jenis obat
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Harga obat
-                    </th>
+                    <th scope="col" class="px-6 py-3">Nama obat</th>
+                    <th scope="col" class="px-6 py-3">Informasi obat</th>
+                    <th scope="col" class="px-6 py-3">Jenis obat</th>
+                    <th scope="col" class="px-6 py-3">Harga obat</th>
+                    <th scope="col" class="px-6 py-3"></th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $query = mysqli_query($db, "SELECT * FROM obat");
-                while ($data = mysqli_fetch_array($query)) :
-
-
-                ?>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <?php echo $data['nama_obat']; ?>
-                        </th>
-                        <td class="px-6 py-4">
-                            <?php echo $data['informasi_obat']; ?>
-                        </td>
-                        <td class="px-6 py-4">
-                            <?php echo $data['jenis_obat']; ?>
-                        </td>
-                        <td class="px-6 py-4">
-                            <?php echo $data['harga_obat']; ?>
-                        </td>
-                        <td><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="">Hapus</a>
-                        </td>
-                    </tr>
-                <?php endwhile                ?>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        wqrwq23
+                    </th>
+                    <td class="px-6 py-4">nkngqwq</td>
+                    <td class="px-6 py-4">Pain Killer</td>
+                    <td class="px-6 py-4">909</td>
+                    <td>
+                        <button data-modal-target="edit-modal-34" data-modal-toggle="edit-modal-34" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                            Edit Produk
+                        </button>
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="hapus.php?id=34">Hapus</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
