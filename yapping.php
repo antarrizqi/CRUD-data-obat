@@ -17,7 +17,7 @@
 if(isset($_POST['submit'])){
     $nama = htmlspecialchars($_POST['password']);
     $password = htmlspecialchars($_POST['password']);
-    $query = 'INSERT INTO user '
+    $query = 'INSERT INTO user ';
 }
 
 ?>

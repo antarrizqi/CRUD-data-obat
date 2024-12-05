@@ -1,10 +1,6 @@
 <?php
+
 include "function.php";
-ob_start();
-session_start();
-if (!isset($_SESSION['login'])) {
-    header("Location: login.php");
-}
 
 $obats = query("SELECT * FROM obat");
 
